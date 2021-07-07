@@ -38,27 +38,27 @@ const Template = (args: any) => {
     return (<NleEmulator {...args} />);
 };
 
-const getDefaultValuePerType = ( type: TDataType ): TControlValueType => {
+const getDefaultValuePerType = ( type: TDataType, ownDefault: TControlValueType ): TControlValueType => {
+    
     switch ( type ) {
         case 'string':
-            return 'sample text'
-
+            return ownDefault || ''
 
         // TODO: this can be improved by returning one of the allowed enum values
         case 'enum':
-            return 'sample enum value'
+            return ownDefault || ''
 
         case 'boolean':
-            return true
+            return ownDefault || true
 
         case 'object':
-            return {}
+            return ownDefault || {}
 
         case 'array':
-            return []
+            return ownDefault || []
 
         case 'number': {
-            return 1
+            return ownDefault || 1
         }
     }
 }
@@ -109,14 +109,14 @@ const getConvertedProp = ( propertyKey: string, property: TProperty ): TConverte
 
             for ( const [ key, value ] of Object.entries( property.items?.properties ) ) {
                 const derivedType = value.type ? value.type : ( value.enum ? 'enum' : null );
-                sampleRow[key] = getDefaultValuePerType( derivedType );
+                sampleRow[key] = getDefaultValuePerType( derivedType, value.default );
             }
 
             return {
                 [propertyKey]: {
                     type: 'object',
                     name: property.title,
-                    defaultValue: sampleRow
+                    defaultValue: [ sampleRow ]
                 }
             }
 
@@ -125,7 +125,8 @@ const getConvertedProp = ( propertyKey: string, property: TProperty ): TConverte
                 [propertyKey]: {
                     type: 'select',
                     options: property.enum,
-                    name: property.title
+                    name: property.title,
+                    defaultValue: property.default || null
                 }
             }
 
