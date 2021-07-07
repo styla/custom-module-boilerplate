@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Hacky way to register window.styla.registerCustomModule function
+import './utils/StylaHelper';
+
 import { NleEmulator } from './NleEmulator';
 import * as schema from '../src/schema.json';
 
@@ -31,28 +34,28 @@ const getConvertedProp = ( propertyKey, property ) => {
 }
 
 const convertSchema = () => {
-    
+
     const allControls = {}
 
     const contentControls = {};
-    
+
     for ( const [key, value] of Object.entries( schema.content?.data?.properties ) ) {
         const newObj = getConvertedProp( key, value );
         Object.assign( contentControls, newObj );
     }
-    
+
     Object.assign( allControls, contentControls );
 
     const settingsControls = {};
-    
+
     for ( const [key, value] of Object.entries( schema.settings?.data?.properties ) ) {
         const newObj = getConvertedProp( key, value );
         Object.assign( settingsControls, newObj );
     }
-    
+
     Object.assign( allControls, contentControls, settingsControls );
 
-    
+
     return allControls;
 }
 
