@@ -24,6 +24,10 @@
         </div>
     {{/if}}
 
+    <div data-overlay-visible="no" class="cartOverlay">
+        <div class="cartContent">cart content goes here</div>
+    </div>
+
 </div>
 
 
@@ -32,10 +36,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .customHeader .logoContainer {
-    max-width: 300px;
+    max-width: {{settings.logoMaxWidth}}px;
+    flex-basis: 30%;
 }
 
 .customHeader .logoContainer img {
@@ -69,6 +75,33 @@
     width: 100%;
     height: auto;
     cursor: pointer;
+}
+
+.customHeader .cartOverlay {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: #000;
+    right: 0;
+    top: 50px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.customHeader .cartOverlay .cartContent {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 12px;
+    color: #fff;
+}
+
+.customHeader .cartOverlay[data-overlay-visible="yes"] {
+    opacity: 1;
 }
 
 </style>

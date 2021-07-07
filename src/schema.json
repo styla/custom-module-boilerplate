@@ -42,6 +42,13 @@
             "minimum": 1,
             "maximum": 100
           },
+          "logoMaxWidth": {
+            "title": "Logo Max Width (px)",
+            "type": "number",
+            "default": 300,
+            "minimum": 80,
+            "maximum": 500
+          },
           "showCart": {
             "title": "Show Cart Icon",
             "type": "boolean",
