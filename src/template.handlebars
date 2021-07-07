@@ -1,1 +1,34 @@
-<h1>hello</h1>
+<div>
+    <div class="socialSharing">
+        <span>{{ content.headerTitle }}</span>
+        {{#each content.icons}}
+        {{#if isShown }}
+        <a data-service-name="{{identifier}}" href="#">
+            <img style="padding-left: {{ @root.settings.iconsPadding}}px; padding-right: {{ @root.settings.iconsPadding}}px; width: {{ @root.settings.iconsSize}}px; height: {{ @root.settings.iconsSize}}px;"
+                src="{{ image.url }}" alt="{{ image.alt }}" title="{{ title }}" />
+        </a>
+        {{/if }}
+        {{/each}}
+    </div>
+</div>
+
+<style>
+:not(#\20) .stylaApp .socialSharing {
+  margin-top: 40px;
+  text-align: center;
+}
+
+
+:not(#\20) .stylaApp .socialSharing > span {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin-bottom: 20px;
+}
+
+:not(#\20) .stylaApp .socialSharing > a {
+  text-decoration: none;
+}
+
+</style>
