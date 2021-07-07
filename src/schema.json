@@ -13,11 +13,6 @@
             "items": {
               "type": "object",
               "properties": {
-                "isShown": {
-                  "title": "Is shown",
-                  "type": "boolean",
-                  "default": true
-                },
                 "image": {
                   "title": "Image",
                   "placeholder": "enter the image URL here...",
@@ -71,6 +66,11 @@
             "default": 16,
             "minimum": 1,
             "maximum": 32
+          },
+          "isShown": {
+            "title": "Is shown",
+            "type": "boolean",
+            "default": true
           }
         }
       },
