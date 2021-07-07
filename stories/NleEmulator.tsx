@@ -87,6 +87,10 @@ export const NleEmulator = ({ ...props }) => {
         }
     });
 
+    handlebars.registerHelper("eq", function (var1, var2, options ): any {
+        return (var1 == var2) ? options.fn(this) : options.inverse(this);
+    });
+
     return (
         <Fragment>
             <div id="custom-module" dangerouslySetInnerHTML={{ __html: handlebars.compile(template)(exposedData) }}></div>

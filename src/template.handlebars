@@ -15,7 +15,12 @@
 
     {{#if settings.showCart }}
         <div class="cartContainer">
-            <img src="https://static-cdn.styla.com/custom-modules-demo/shopping-cart-solid.svg" />
+            {{#eq settings.cartIcon 'cart' }}
+                <img src="https://static-cdn.styla.com/custom-modules-demo/shopping-cart-solid.svg" />
+            {{/eq}}
+            {{#eq settings.cartIcon 'basket' }}
+                <img src="https://static-cdn.styla.com/custom-modules-demo/shopping-basket-solid.svg" />
+            {{/eq}}
         </div>
     {{/if}}
 
