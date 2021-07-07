@@ -14,7 +14,7 @@ declare global {
 
     interface Styla {
         registerCustomModule(type: string, func: Callback): void;
-        executeCustomModule(wrapper: any, props: any): void;
+        executeCustomModule(wrapper: any, content: any, context: any, settings: any): void;
     }
 
     interface Window {
