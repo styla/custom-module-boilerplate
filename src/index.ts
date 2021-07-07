@@ -3,7 +3,7 @@ window.styla.registerCustomModule('NAME', async (wrapper, content) => {
     console.log('wrapper', wrapper);
     console.log('content', content);
 
-    const linkOpener = (event) => {
+    const linkOpener = (event: any) => {
         const serviceName = event.currentTarget.getAttribute("data-service-name");
         const url = escape(document.location.href);
         const title = escape(document.title);

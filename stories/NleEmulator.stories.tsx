@@ -13,7 +13,7 @@ export default {
     component: NleEmulator,
 };
 
-const Template = (args) => {
+const Template = (args: any) => {
     return (<NleEmulator {...args} />);
 };
 
