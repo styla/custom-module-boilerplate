@@ -12,10 +12,13 @@
     "@storybook/manager-webpack5": "^6.3.2",
     "@storybook/react": "^6.3.2",
     "babel-loader": "^8.2.2",
+    "handlebars-loader": "^1.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "handlebars": "^4.7.7"
+  },
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
