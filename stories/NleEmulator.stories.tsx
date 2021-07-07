@@ -30,6 +30,10 @@ type TConvertedControl = {
     [key: string]: TControlValueType
 }
 
+type TArrayRow = {
+    [key: string]: any;
+}
+
 export default {
     title: 'Example/NleEmulator',
     component: NleEmulator,
@@ -95,7 +99,7 @@ const getConvertedProp = ( propertyKey: string, property: TProperty ): TConverte
 
         case 'array':
 
-            const sampleRow = {}
+            const sampleRow = {} as TArrayRow;
 
             for ( const [ key, value ] of Object.entries( property.items?.properties ) ) {
                 const derivedType = value.type ? value.type : ( value.enum ? 'enum' : null );

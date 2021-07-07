@@ -2,12 +2,10 @@
     <div class="socialSharing">
         <span>{{ content.headerTitle }}</span>
         {{#each content.icons}}
-        {{#if isShown }}
-        <a data-service-name="{{identifier}}" href="#">
-            <img style="padding-left: {{ @root.settings.iconsPadding}}px; padding-right: {{ @root.settings.iconsPadding}}px; width: {{ @root.settings.iconsSize}}px; height: {{ @root.settings.iconsSize}}px;"
-                src="{{ image.url }}" alt="{{ image.alt }}" title="{{ title }}" />
-        </a>
-        {{/if }}
+          <a data-service-name="{{identifier}}" href="#">
+              <img style="padding-left: {{ @root.settings.iconsPadding}}px; padding-right: {{ @root.settings.iconsPadding}}px; width: {{ @root.settings.iconsSize}}px; height: {{ @root.settings.iconsSize}}px;"
+                  src="{{ image.url }}" alt="{{ image.alt }}" title="{{ title }}" />
+          </a>
         {{/each}}
     </div>
 </div>
