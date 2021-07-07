@@ -9,29 +9,22 @@ import template from '../src/template.handlebars';
 export const NleEmulator = ({ ...props }) => {
 
     useEffect(() => {
-        /**
-        const script = document.createElement('script');
-
-        script.innerHTML = `
-            const props = ${JSON.stringify(props)};
-            window.styla.executeCustomModule(document.querySelector('#custom-module'), props);
-        `;
-        script.async = true;
-
-        document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
-        }
-        */
         setTimeout(() => {
-            window.styla.executeCustomModule(document.querySelector('#custom-module'), props);;
+            window.styla.executeCustomModule(document.querySelector('#custom-module'), props);
         }, 100);
     }, [props]);
 
+    const exposedData = {
+        content: props,
+        settings: {}, // TODO do we need fake settings ?!?
+        context: {
+            areaContext: {}, // TODO: do we need fake area context ?!?
+        },
+    };
+
     return (
         <Fragment>
-            <div id="custom-module" dangerouslySetInnerHTML={{ __html: template() }}></div>
+            <div id="custom-module" dangerouslySetInnerHTML={{ __html: template(exposedData) }}></div>
         </Fragment>
 
     );
