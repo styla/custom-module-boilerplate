@@ -48,7 +48,7 @@ export const NleEmulator = ({ ...props }) => {
 
     return (
         <Fragment>
-            <div id="custom-module" dangerouslySetInnerHTML={{ __html: template(exposedData) }}></div>
+            <div className="stylaApp" id="custom-module" dangerouslySetInnerHTML={{ __html: template(exposedData) }}></div>
         </Fragment>
 
     );
