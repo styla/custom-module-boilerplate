@@ -18,10 +18,10 @@ type TPropertyItems = {
 type TProperty = Readonly<{
     title: string;
     placeholder?: string;
-    default?: string | boolean
-    type?: TDataType
+    default?: string | boolean;
+    type?: TDataType; // TODO: this should probably be required. check why it's not in our examples
     items?: TPropertyItems;
-    enum?: ReadonlyArray<string>
+    enum?: ReadonlyArray<string>;
 }>
 
 type TControlValueType = string | boolean | number | ReadonlyArray<{}> | {};
@@ -33,11 +33,6 @@ type TConvertedControl = {
 type TArrayRow = {
     [key: string]: any;
 }
-
-export default {
-    title: 'Example/NleEmulator',
-    component: NleEmulator,
-};
 
 const Template = (args: any) => {
     return (<NleEmulator {...args} />);
@@ -72,30 +67,41 @@ const getDefaultValuePerType = ( type: TDataType ): TControlValueType => {
 const getConvertedProp = ( propertyKey: string, property: TProperty ): TConvertedControl => {
     
     const { type } = property;
+    const derivedType = type ? type : ( property.enum ? 'enum' : null );
 
-    switch ( type ) {
+    switch ( derivedType ) {
         case 'string':
         default:
             return {
-                [propertyKey]: `insert ${ propertyKey } text here`
+                [propertyKey]: {
+                    type: 'string',
+                    name: property.title,
+                    defaultValue: property.default || `Enter ${ property.title } here`
+                }
             }
 
         case 'number':
             return {
-                [propertyKey]: property.default
+                [propertyKey]: {
+                    type: 'number',
+                    name: property.title,
+                    defaultValue: property.default || 0
+                }
             }
 
         case 'boolean':
             return {
-                [propertyKey]: property.default
+                [propertyKey]: {
+                    type: 'boolean',
+                    name: property.title,
+                    defaultValue: property.default || true
+                }
             }
 
         case 'object':
             return {
                 [propertyKey]: {}
             }
-
-        // TODO: add support for enum at this level (storybook documentation is not very clear on how it works)
 
         case 'array':
 
@@ -107,9 +113,20 @@ const getConvertedProp = ( propertyKey: string, property: TProperty ): TConverte
             }
 
             return {
-                [propertyKey]: [
-                    sampleRow
-                ]
+                [propertyKey]: {
+                    type: 'object',
+                    name: property.title,
+                    defaultValue: sampleRow
+                }
+            }
+
+        case 'enum':
+            return {
+                [propertyKey]: {
+                    type: 'select',
+                    options: property.enum,
+                    name: property.title
+                }
             }
 
     }
@@ -137,9 +154,13 @@ const convertSchema = () => {
 
     Object.assign( allControls, contentControls, settingsControls );
 
-
     return allControls;
 }
 
 export const Render = Template.bind({});
-Render.args = convertSchema();
+
+export default {
+    title: 'Example/NleEmulator',
+    component: NleEmulator,
+    argTypes: convertSchema()
+};
