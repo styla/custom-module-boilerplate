@@ -8,6 +8,28 @@ import * as schema from '../src/schema.json';
 
 type TDataType = 'array' | 'string' | 'number' | 'boolean' | 'object' | 'enum';
 
+type TPropertyItems = {
+    type: TDataType;
+    properties: {
+        [key: string]: TProperty;
+    }
+}
+
+type TProperty = Readonly<{
+    title: string;
+    placeholder?: string;
+    default?: string | boolean
+    type?: TDataType
+    items?: TPropertyItems;
+    enum?: ReadonlyArray<string>
+}>
+
+type TControlValueType = string | boolean | number | ReadonlyArray<{}> | {};
+
+type TConvertedControl = {
+    [key: string]: TControlValueType
+}
+
 export default {
     title: 'Example/NleEmulator',
     component: NleEmulator,
@@ -17,7 +39,7 @@ const Template = (args) => {
     return (<NleEmulator {...args} />);
 };
 
-const getDefaultValuePerType = ( type: TDataType ) => {
+const getDefaultValuePerType = ( type: TDataType ): TControlValueType => {
     switch ( type ) {
         case 'string':
             return 'sample text'
@@ -43,9 +65,8 @@ const getDefaultValuePerType = ( type: TDataType ) => {
 }
 
 
-// TODO: all types are currently missing
-
-const getConvertedProp = ( propertyKey, property ) => {
+const getConvertedProp = ( propertyKey: string, property: TProperty ): TConvertedControl => {
+    
     const { type } = property;
 
     switch ( type ) {
@@ -77,9 +98,7 @@ const getConvertedProp = ( propertyKey, property ) => {
             const sampleRow = {}
 
             for ( const [ key, value ] of Object.entries( property.items?.properties ) ) {
-
                 const derivedType = value.type ? value.type : ( value.enum ? 'enum' : null );
-
                 sampleRow[key] = getDefaultValuePerType( derivedType );
             }
 
@@ -99,7 +118,7 @@ const convertSchema = () => {
     const contentControls = {};
 
     for ( const [key, value] of Object.entries( schema.content?.data?.properties ) ) {
-        const newObj = getConvertedProp( key, value );
+        const newObj = getConvertedProp( key, value as TProperty );
         Object.assign( contentControls, newObj );
     }
 
@@ -108,7 +127,7 @@ const convertSchema = () => {
     const settingsControls = {};
 
     for ( const [ key, value ] of Object.entries( schema.settings?.data?.properties ) ) {
-        const newObj = getConvertedProp( key, value );
+        const newObj = getConvertedProp( key, value as TProperty );
         Object.assign( settingsControls, newObj );
     }
 
