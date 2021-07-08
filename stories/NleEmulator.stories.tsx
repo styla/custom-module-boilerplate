@@ -116,7 +116,7 @@ const getConvertedProp = ( propertyKey: string, property: TProperty ): TConverte
                 [propertyKey]: {
                     type: 'object',
                     name: property.title,
-                    defaultValue: [ sampleRow ]
+                    defaultValue: property.default || [ sampleRow ]
                 }
             }
 

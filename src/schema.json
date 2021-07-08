@@ -1,66 +1,80 @@
 {
-    "content": {
-      "data": {
-        "properties": {
-          "logoUrl": {
-            "title": "Logo URL",
-            "type": "string",
-            "default": "https://static-cdn.styla.com/custom-modules-demo/company-logo.png"
-          },
-          "links": {
-            "title": "Menu Links",
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "title": "Title",
-                  "type": "object",
-                  "default": "Link Title"
-                },
-                "url": {
-                  "title": "Destination URL",
-                  "type": "string",
-                  "default": "#"
-                }
-                
-              }
-            }
-          }
+  "content": {
+    "data": {
+      "properties": {
+        "logoUrl": {
+          "title": "Logo URL",
+          "type": "string",
+          "default": "https://static-cdn.styla.com/custom-modules-demo/company-logo.png"
         },
-        "type": "object"
-      },
-      "ui": {}
-    },
-    "settings": {
-      "data": {
-        "properties": {
-          "linksSpacing": {
-            "title": "Space between links (px)",
-            "type": "number",
-            "default": 20,
-            "minimum": 1,
-            "maximum": 100
-          },
-          "logoMaxWidth": {
-            "title": "Logo Max Width (px)",
-            "type": "number",
-            "default": 300,
-            "minimum": 80,
-            "maximum": 500
-          },
-          "showCart": {
-            "title": "Show Cart Icon",
-            "type": "boolean",
-            "default": true
-          },
-          "cartIcon": {
-            "title": "Cart Icon",
-            "enum": [ "cart", "basket" ],
-            "default": "cart"
+        "links": {
+          "title": "Menu Links",
+          "type": "array",
+          "default": [
+            {
+              "title": "About",
+              "url": "/about"
+            },
+            {
+              "title": "Products",
+              "url": "/products"
+            },
+            {
+              "title": "Contact",
+              "url": "/contact"
+            }
+          ],
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "title": "Title",
+                "type": "object",
+                "default": "Link Title"
+              },
+              "url": {
+                "title": "Destination URL",
+                "type": "string",
+                "default": "#"
+              }
+              
+            }
           }
         }
       },
-      "ui": {}
-    }
+      "type": "object"
+    },
+    "ui": {}
+  },
+  "settings": {
+    "data": {
+      "properties": {
+        "linksSpacing": {
+          "title": "Space between links (px)",
+          "type": "number",
+          "default": 20,
+          "minimum": 1,
+          "maximum": 100
+        },
+        "logoMaxWidth": {
+          "title": "Logo Max Width (px)",
+          "type": "number",
+          "default": 300,
+          "minimum": 80,
+          "maximum": 500
+        },
+        "showCart": {
+          "title": "Show Cart Icon",
+          "type": "boolean",
+          "default": true
+        },
+        "cartIcon": {
+          "title": "Cart Icon",
+          "enum": [ "cart", "basket" ],
+          "default": "cart"
+        }
+      }
+    },
+    "ui": {}
   }
+}
