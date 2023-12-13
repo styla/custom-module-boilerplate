@@ -7,14 +7,22 @@
             "dom",
             "esnext"
         ],
+        "outDir": "build",
         "target": "es5",
         "jsx": "react",
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "allowJs": true,
+        "rootDir": "./",
         "typeRoots": [
             "./types"
-        ],
-    }
+        ]
+    },
+    "exclude": [
+        "stories",
+        "build",
+        "utils",
+        "webpack.config.js"
+    ]
 }
