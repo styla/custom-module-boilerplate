@@ -3,7 +3,7 @@ import React from 'react';
 // Hacky way to register window.styla.registerCustomModule function
 import './utils/StylaHelper';
 
-import { NleEmulator } from './NleEmulator';
+import { DeveloperSandbox } from './DeveloperSandbox';
 import * as schema from '../src/schema.json';
 
 type TDataType = 'array' | 'string' | 'number' | 'boolean' | 'object' | 'enum';
@@ -35,7 +35,7 @@ type TArrayRow = {
 }
 
 const Template = (args: any) => {
-    return (<NleEmulator {...args} />);
+    return (<DeveloperSandbox {...args} />);
 };
 
 const getDefaultValuePerType = ( type: TDataType, ownDefault: TControlValueType ): TControlValueType => {
@@ -139,21 +139,25 @@ const convertSchema = () => {
 
     const contentControls = {};
 
-    for ( const [key, value] of Object.entries( schema.content?.data?.properties ) ) {
-        const newObj = getConvertedProp( key, value as TProperty );
-        Object.assign( contentControls, newObj );
-    }
+    if (schema.content?.data) {
+        for ( const [key, value] of Object.entries( schema.content?.data?.properties ) ) {
+            const newObj = getConvertedProp( key, value as TProperty );
+            Object.assign( contentControls, newObj );
+        }
 
-    Object.assign( allControls, contentControls );
+        Object.assign( allControls, contentControls );
+    }
 
     const settingsControls = {};
 
-    for ( const [ key, value ] of Object.entries( schema.settings?.data?.properties ) ) {
-        const newObj = getConvertedProp( key, value as TProperty );
-        Object.assign( settingsControls, newObj );
-    }
+    if (schema.settings?.data) {
+        for ( const [ key, value ] of Object.entries( schema.settings?.data?.properties ) ) {
+            const newObj = getConvertedProp( key, value as TProperty );
+            Object.assign( settingsControls, newObj );
+        }
 
-    Object.assign( allControls, contentControls, settingsControls );
+        Object.assign( allControls, contentControls, settingsControls );
+    }
 
     return allControls;
 }
@@ -161,7 +165,7 @@ const convertSchema = () => {
 export const Render = Template.bind({});
 
 export default {
-    title: 'Example/NleEmulator',
-    component: NleEmulator,
+    title: 'Example/DeveloperSandbox',
+    component: DeveloperSandbox,
     argTypes: convertSchema()
 };

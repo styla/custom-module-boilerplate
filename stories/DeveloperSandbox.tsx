@@ -1,9 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
 import * as handlebars from 'handlebars';
-//import helpers from 'handlebars-helpers';
-
-// Import custom module source
-import '../src/index';
 
 // @ts-ignore
 import schema from '../src/schema';
@@ -11,12 +7,15 @@ import schema from '../src/schema';
 // @ts-ignore
 import template from '../src/template.handlebars';
 
-/**
-// add 188 handlebars helpers https://www.npmjs.com/package/handlebars-helpers
-helpers({
-    handlebars: handlebars
-});
-*/
+import '../_dev_tmp/css/styles.css';
+
+// Import custom module index file (optional)
+try {
+    // @ts-ignore
+    import('../src/index');
+  } catch (error) {
+    console.warn("Module index file is not provided");
+}
 
 const pickAttributes = (obj: any, isContent: boolean) => {
     for (const propName in obj) {
@@ -27,10 +26,11 @@ const pickAttributes = (obj: any, isContent: boolean) => {
     return obj;
 }
 
-export const NleEmulator = ({ ...props }) => {
+export const DeveloperSandbox = ({ ...props }) => {
 
     useEffect(() => {
         setTimeout(() => {
+            // @ts-ignore
             window.styla.executeCustomModule(
                 document.querySelector('#custom-module'),
                 pickAttributes(Object.assign({}, props), true),

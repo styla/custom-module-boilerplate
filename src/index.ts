@@ -1,7 +1,4 @@
-window.styla.registerCustomModule('NAME', async (wrapper, content) => {
-
-    // console.log('wrapper', wrapper);
-    // console.log('content', content);
+window.styla.registerCustomModule('NAME', async (wrapper, _content) => {
 
     const cartContainer = wrapper.querySelector('.cartContainer');
     
