@@ -4,7 +4,7 @@ import React from 'react';
 import './utils/StylaHelper';
 
 import { DeveloperSandbox } from './DeveloperSandbox';
-import * as schema from '../src/schema.json';
+import * as _schema from '../src/schema.json';
 
 type TDataType = 'array' | 'string' | 'number' | 'boolean' | 'object' | 'enum';
 
@@ -24,48 +24,61 @@ type TProperty = Readonly<{
     enum?: ReadonlyArray<string>;
 }>
 
-type TControlValueType = string | boolean | number | ReadonlyArray<{}> | {};
+type TControlValueType = string | boolean | number | ReadonlyArray<object> | object;
 
 type TConvertedControl = {
     [key: string]: TControlValueType
 }
 
 type TArrayRow = {
-    [key: string]: any;
+    [key: string]: TControlValueType;
 }
 
-const Template = (args: any) => {
-    return (<DeveloperSandbox {...args} />);
-};
-
-const getDefaultValuePerType = ( type: TDataType, ownDefault: TControlValueType ): TControlValueType => {
-    
-    switch ( type ) {
-        case 'string':
-            return ownDefault || ''
-
-        // TODO: this can be improved by returning one of the allowed enum values
-        case 'enum':
-            return ownDefault || ''
-
-        case 'boolean':
-            return ownDefault || true
-
-        case 'object':
-            return ownDefault || {}
-
-        case 'array':
-            return ownDefault || []
-
-        case 'number': {
-            return ownDefault || 1
-        }
+type TSchema = {
+    content?: {
+        data: TSchemaData;
+    }
+    settings?: {
+        data: TSchemaData;
     }
 }
 
+type TSchemaData = {
+    properties: object;
+}
+
+const schema = _schema as TSchema;
+
+const Template = (args: object) => (<DeveloperSandbox {...args} />);
+
+const getDefaultValuePerType = ( type: TDataType, ownDefault: TControlValueType ): TControlValueType => {
+
+    switch ( type ) {
+        case 'string':
+            return ownDefault || '';
+
+        // TODO: this can be improved by returning one of the allowed enum values
+        case 'enum':
+            return ownDefault || '';
+
+        case 'boolean':
+            return ownDefault || true;
+
+        case 'object':
+            return ownDefault || {};
+
+        case 'array':
+            return ownDefault || [];
+
+        case 'number': {
+            return ownDefault || 1;
+        }
+    }
+};
+
 
 const getConvertedProp = ( propertyKey: string, property: TProperty ): TConvertedControl => {
-    
+
     const { type } = property;
     const derivedType = type ? type : ( property.enum ? 'enum' : null );
 
@@ -76,49 +89,55 @@ const getConvertedProp = ( propertyKey: string, property: TProperty ): TConverte
                 [propertyKey]: {
                     type: 'string',
                     name: property.title,
-                    defaultValue: property.default || `Enter ${ property.title } here`
-                }
-            }
+                    defaultValue: property.default || `Enter ${ property.title } here`,
+                },
+            };
 
         case 'number':
             return {
                 [propertyKey]: {
                     type: 'number',
                     name: property.title,
-                    defaultValue: property.default || 0
-                }
-            }
+                    defaultValue: property.default || 0,
+                },
+            };
 
         case 'boolean':
             return {
                 [propertyKey]: {
                     type: 'boolean',
                     name: property.title,
-                    defaultValue: property.default || true
-                }
-            }
+                    defaultValue: property.default || true,
+                },
+            };
 
         case 'object':
             return {
-                [propertyKey]: {}
-            }
+                [propertyKey]: {},
+            };
 
         case 'array':
 
             const sampleRow = {} as TArrayRow;
 
+            if (!property.items) {
+                return {};
+            }
+
             for ( const [ key, value ] of Object.entries( property.items?.properties ) ) {
                 const derivedType = value.type ? value.type : ( value.enum ? 'enum' : null );
-                sampleRow[key] = getDefaultValuePerType( derivedType, value.default );
+                if ( derivedType && value.default ) {
+                    sampleRow[key] = getDefaultValuePerType( derivedType, value.default );
+                }
             }
 
             return {
                 [propertyKey]: {
                     type: 'object',
                     name: property.title,
-                    defaultValue: property.default || [ sampleRow ]
-                }
-            }
+                    defaultValue: property.default || [ sampleRow ],
+                },
+            };
 
         case 'enum':
             return {
@@ -126,16 +145,16 @@ const getConvertedProp = ( propertyKey: string, property: TProperty ): TConverte
                     type: 'select',
                     options: property.enum,
                     name: property.title,
-                    defaultValue: property.default || null
-                }
-            }
+                    defaultValue: property.default || null,
+                },
+            };
 
     }
-}
+};
 
 const convertSchema = () => {
 
-    const allControls = {}
+    const allControls = {};
 
     const contentControls = {};
 
@@ -160,12 +179,12 @@ const convertSchema = () => {
     }
 
     return allControls;
-}
+};
 
 export const Render = Template.bind({});
 
 export default {
     title: 'Example/DeveloperSandbox',
     component: DeveloperSandbox,
-    argTypes: convertSchema()
+    argTypes: convertSchema(),
 };
