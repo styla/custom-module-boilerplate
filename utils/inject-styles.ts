@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 // This script is responsible for:
 // - Getting the minified CSS file (which is the result of the Sass file compile)
 // - Include this CSS in the head of the original Handlebars file
@@ -17,5 +19,3 @@ let handlebarsContent: string = fs.readFileSync(handlebarsFilePath, 'utf-8');
 handlebarsContent = `<style>${cssContent}</style>\n${handlebarsContent}`;
 
 fs.writeFileSync(handlebarsBuildPath, handlebarsContent);
-
-console.log('Styles injected successfully');

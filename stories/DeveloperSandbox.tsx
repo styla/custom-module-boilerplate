@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { Fragment, useEffect } from 'react';
 import * as handlebars from 'handlebars';
 
@@ -13,18 +14,30 @@ import '../_dev_tmp/css/styles.css';
 try {
     // @ts-ignore
     import('../src/index');
-  } catch (error) {
-    console.warn("Module index file is not provided");
+} catch (error) {
+    console.warn('Module index file is not provided');
 }
 
-const pickAttributes = (obj: any, isContent: boolean) => {
+type TAreaContext = {
+    entity: {
+        type: string,
+        id: string
+    }
+    products: TProductExcerpt[]
+}
+
+type TProductExcerpt = {
+    id: string
+}
+
+const pickAttributes = (obj: object, isContent: boolean) => {
     for (const propName in obj) {
         if (Object.keys(schema.content.data.properties).includes(propName) !== isContent) {
             delete obj[propName];
         }
     }
     return obj;
-}
+};
 
 export const DeveloperSandbox = ({ ...props }) => {
 
@@ -35,7 +48,7 @@ export const DeveloperSandbox = ({ ...props }) => {
                 document.querySelector('#custom-module'),
                 pickAttributes(Object.assign({}, props), true),
                 {},
-                pickAttributes(Object.assign({}, props), false)
+                pickAttributes(Object.assign({}, props), false),
             );
         }, 100);
     }, [props]);
@@ -60,15 +73,15 @@ export const DeveloperSandbox = ({ ...props }) => {
      * Handlebars usage:
      * {{customField context.areaContext.products.[0].custom_fields 'attach_title_1'}}
      */
-    handlebars.registerHelper("customFields", function (customField: string, fieldName: string) {
+    handlebars.registerHelper('customFields', function (customField: string, fieldName: string) {
         if (!customField) {
-            return
+            return;
         }
 
         const customArray = JSON.parse(customField);
 
         if (!Array.isArray(customArray) || customArray.length === 0) {
-            return
+            return;
         }
 
         for (const element of customArray) {
@@ -81,13 +94,15 @@ export const DeveloperSandbox = ({ ...props }) => {
     /**
      * Return the main product of the local context on a PDP
      */
-    handlebars.registerHelper("getMainProduct", function (): any {
-        if ((exposedData.context.areaContext as any).entity?.type === "PRODUCT") {
-            return (exposedData.context.areaContext as any).products?.find((value: any) => value.id == (exposedData.context.areaContext as any).areaContext.entity.id)
+    handlebars.registerHelper('getMainProduct', function (): object | undefined {
+        if ((exposedData.context.areaContext as TAreaContext).entity?.type === 'PRODUCT') {
+            return (exposedData.context.areaContext as TAreaContext).products?.find(
+                (value) => value.id == (exposedData.context.areaContext as TAreaContext).entity.id,
+            );
         }
     });
 
-    handlebars.registerHelper("eq", function (var1, var2, options ): any {
+    handlebars.registerHelper('eq', function (var1, var2, options ): void {
         return (var1 == var2) ? options.fn(this) : options.inverse(this);
     });
 
