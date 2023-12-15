@@ -29,7 +29,7 @@
             "properties": {
               "title": {
                 "title": "Title",
-                "type": "object",
+                "type": "string",
                 "default": "Link Title"
               },
               "url": {
@@ -37,14 +37,27 @@
                 "type": "string",
                 "default": "#"
               }
-              
             }
           }
         }
       },
       "type": "object"
     },
-    "ui": {}
+    "ui": {
+      "logoUrl": {
+        "ui:field": "InputField"
+      },
+      "links": {
+        "items": {
+          "title": {
+            "ui:field": "InputField"
+          },
+          "url": {
+            "ui:field": "InputField"
+          }
+        }
+      }
+    }
   },
   "settings": {
     "data": {
@@ -53,7 +66,7 @@
           "title": "Space between links (px)",
           "type": "number",
           "default": 20,
-          "minimum": 1,
+          "minimum": 0,
           "maximum": 100
         },
         "logoMaxWidth": {
@@ -70,11 +83,31 @@
         },
         "cartIcon": {
           "title": "Cart Icon",
-          "enum": [ "cart", "basket" ],
+          "enum": [
+            "cart",
+            "basket"
+          ],
           "default": "cart"
         }
       }
     },
-    "ui": {}
+    "ui": {
+      "linksSpacing": {
+        "ui:field": "SliderField",
+        "ui:options": {
+            "marks": {
+                "20": "20",  
+                "40": "40",
+                "60": "60",
+                "100": "100"
+            },
+            "step": 10,
+            "tooltipSuffix": " px"
+        }
+      },
+      "logoMaxWidth": {
+        "ui:field": "InputField"
+      }
+    }
   }
 }
