@@ -16,7 +16,8 @@
         "allowJs": true,
         "rootDir": "./",
         "typeRoots": [
-            "./types"
+            "./types",
+            "node_modules/@types"
         ]
     },
     "exclude": [
