@@ -159,7 +159,7 @@ const convertSchema = () => {
     const contentControls = {};
 
     if (schema.content?.data) {
-        for ( const [key, value] of Object.entries( schema.content?.data?.properties ) ) {
+        for ( const [key, value] of Object.entries( schema.content.data.properties ) ) {
             const newObj = getConvertedProp( key, value as TProperty );
             Object.assign( contentControls, newObj );
         }
@@ -170,7 +170,7 @@ const convertSchema = () => {
     const settingsControls = {};
 
     if (schema.settings?.data) {
-        for ( const [ key, value ] of Object.entries( schema.settings?.data?.properties ) ) {
+        for ( const [ key, value ] of Object.entries( schema.settings.data.properties ) ) {
             const newObj = getConvertedProp( key, value as TProperty );
             Object.assign( settingsControls, newObj );
         }

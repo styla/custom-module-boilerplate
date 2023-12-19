@@ -26,12 +26,12 @@ The demo module has the purpose of showcasing some of the Custom Modules feature
 We recommend to use the Demo module as a starting point for your implementation.
 In the following table we will recap the existing files and their role:
 
-| File Path                 | Description                                                         |
-| --------------------------| ------------------------------------------------------------------- |
-| `src/schema.json`         | JSON file containing all the content/settings options of the module. |
+| File Path                 | Description                                                                                                     |
+| --------------------------| --------------------------------------------------------------------------------------------------------------- |
+| `src/schema.json`         | JSON file containing all the content/settings options of the module.                                            |
 | `src/template.handlebars` | Defines the HTML structure of the module and allows the usage of dynamic options, thanks to Handlebars support. |
-| `src/index.ts`            | Typescript file which contains all the JS logic that will be executed on the client side.
-| `src/scss/styles.scss`    | Sass file containing all the styles of the module. |
+| `src/index.ts`            | Typescript file which contains all the JS logic that will be executed on the client side.                       |  
+| `src/scss/styles.scss`    | Sass file containing all the styles of the module.                                                              |
 
 
 Feel free to alter any of those files, and the live preview will update reflecting your changes.

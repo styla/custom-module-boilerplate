@@ -8,7 +8,12 @@ import schema from '../src/schema';
 // @ts-ignore
 import template from '../src/template.handlebars';
 
-import '../_dev_tmp/css/styles.css';
+try {
+    // @ts-ignore
+    import('../_dev_tmp/css/styles.css');
+} catch (error) {
+    console.warn('Styles file not found. Run the project at least once in order to generate it');
+}
 
 // Import custom module index file (optional)
 try {
@@ -57,7 +62,7 @@ export const DeveloperSandbox = ({ ...props }) => {
         content: pickAttributes(Object.assign({}, props), true),
         settings: pickAttributes(Object.assign({}, props), false),
         context: {
-            areaContext: {}, // TODO: do we need fake area context ?!?
+            areaContext: {} as Partial<TAreaContext>,
         },
     };
 
