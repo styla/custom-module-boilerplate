@@ -100,9 +100,9 @@ export const DeveloperSandbox = ({ ...props }) => {
      * Return the main product of the local context on a PDP
      */
     handlebars.registerHelper('getMainProduct', function (): object | undefined {
-        if ((exposedData.context.areaContext as TAreaContext).entity?.type === 'PRODUCT') {
-            return (exposedData.context.areaContext as TAreaContext).products?.find(
-                (value) => value.id == (exposedData.context.areaContext as TAreaContext).entity.id,
+        if ((exposedData.context.areaContext).entity?.type === 'PRODUCT') {
+            return (exposedData.context.areaContext).products?.find(
+                (value) => value.id == (exposedData.context.areaContext)?.entity?.id,
             );
         }
     });
