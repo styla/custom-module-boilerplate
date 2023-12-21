@@ -23,6 +23,7 @@
     },
     "plugins": [
       "@typescript-eslint",
+      "@stylistic/eslint-plugin",
       "react"
     ],
     "rules": {
@@ -88,7 +89,7 @@
           ]
         }
       ],
-      "space-in-parens": ["warn", "never"],
+      "@stylistic/space-in-parens": ["warn", "never"],
       "no-multi-spaces": "warn",
       "no-multiple-empty-lines": [
         "warn",
