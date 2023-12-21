@@ -14,5 +14,5 @@ window.styla.registerCustomModule('NAME', async (wrapper, _content) => {
         }
     };
 
-    cartContainer?.addEventListener( 'click', onCartClick );
+    cartContainer?.addEventListener('click', onCartClick);
 });

@@ -43,6 +43,7 @@
     "sass-dev": "sass --watch --update --style=expanded src/scss:_dev_tmp/css",
     "sass-prod": "sass --no-source-map --style=compressed src/scss:_dev_tmp/css",
     "inject-css": "ts-node utils/inject-styles.ts",
+    "lint": "eslint .",
     "copy-files": "cpy 'src/schema.json' 'build'"
   }
 }

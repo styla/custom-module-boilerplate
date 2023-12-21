@@ -107,7 +107,7 @@ export const DeveloperSandbox = ({ ...props }) => {
         }
     });
 
-    handlebars.registerHelper('eq', function (var1, var2, options ): void {
+    handlebars.registerHelper('eq', function (var1, var2, options): void {
         return (var1 == var2) ? options.fn(this) : options.inverse(this);
     });
 
