@@ -51,9 +51,9 @@ const schema = _schema as TSchema;
 
 const Template = (args: object) => (<DeveloperSandbox {...args} />);
 
-const getDefaultValuePerType = ( type: TDataType, ownDefault: TControlValueType ): TControlValueType => {
+const getDefaultValuePerType = (type: TDataType, ownDefault: TControlValueType): TControlValueType => {
 
-    switch ( type ) {
+    switch (type) {
         case 'string':
             return ownDefault || '';
 
@@ -77,12 +77,12 @@ const getDefaultValuePerType = ( type: TDataType, ownDefault: TControlValueType 
 };
 
 
-const getConvertedProp = ( propertyKey: string, property: TProperty ): TConvertedControl => {
+const getConvertedProp = (propertyKey: string, property: TProperty): TConvertedControl => {
 
     const { type } = property;
-    const derivedType = type ? type : ( property.enum ? 'enum' : null );
+    const derivedType = type ? type : (property.enum ? 'enum' : null);
 
-    switch ( derivedType ) {
+    switch (derivedType) {
         case 'string':
         default:
             return {
@@ -124,10 +124,10 @@ const getConvertedProp = ( propertyKey: string, property: TProperty ): TConverte
                 return {};
             }
 
-            for ( const [ key, value ] of Object.entries( property.items?.properties ) ) {
-                const derivedType = value.type ? value.type : ( value.enum ? 'enum' : null );
-                if ( derivedType && value.default ) {
-                    sampleRow[key] = getDefaultValuePerType( derivedType, value.default );
+            for (const [ key, value ] of Object.entries(property.items?.properties)) {
+                const derivedType = value.type ? value.type : (value.enum ? 'enum' : null);
+                if (derivedType && value.default) {
+                    sampleRow[key] = getDefaultValuePerType(derivedType, value.default);
                 }
             }
 
@@ -159,23 +159,23 @@ const convertSchema = () => {
     const contentControls = {};
 
     if (schema.content?.data) {
-        for ( const [key, value] of Object.entries( schema.content.data.properties ) ) {
-            const newObj = getConvertedProp( key, value as TProperty );
-            Object.assign( contentControls, newObj );
+        for (const [key, value] of Object.entries(schema.content.data.properties)) {
+            const newObj = getConvertedProp(key, value as TProperty);
+            Object.assign(contentControls, newObj);
         }
 
-        Object.assign( allControls, contentControls );
+        Object.assign(allControls, contentControls);
     }
 
     const settingsControls = {};
 
     if (schema.settings?.data) {
-        for ( const [ key, value ] of Object.entries( schema.settings.data.properties ) ) {
-            const newObj = getConvertedProp( key, value as TProperty );
-            Object.assign( settingsControls, newObj );
+        for (const [ key, value ] of Object.entries(schema.settings.data.properties)) {
+            const newObj = getConvertedProp(key, value as TProperty);
+            Object.assign(settingsControls, newObj);
         }
 
-        Object.assign( allControls, contentControls, settingsControls );
+        Object.assign(allControls, contentControls, settingsControls);
     }
 
     return allControls;
