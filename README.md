@@ -4,10 +4,10 @@ This repository is a boilerplate for the development of a [Styla Custom Module](
 
 It offers the following set of features:
 - **Completely encapsulated sandbox**: no need to run additional services or to upload files to an external host.
-- **Live preview**: we are using [Storybook](https://storybook.js.org/) to live render the module in real-time.
+- **Live preview**: we are using [Storybook](https://storybook.js.org/) to render the module preview in real-time.
 - **Test with different content and settings**: everything that is defined in `schema.json` will be rendered in the Storybook interface as customizable controls. This will allow you to test your module in different scenarios, as you would do when the module is included in a Styla shop.
 - **Use Sass for styling**: we support Sass for writing the module CSS. At build time we will then automatically compile, minify and include the styles as part of the handlebars file.
-- **Use Typescript for the client facing code**. If your module also requires JS code to be executed on the client, you can use Typescript for a more resilient and maintainable code. It will be converted to JS by us at build time.
+- **Use Typescript for the client facing code**: If your module also requires JS code to be executed on the client, you can use Typescript for a more resilient and maintainable code. It will be converted to JS by us at build time.
 
 
 ## How to launch
