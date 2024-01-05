@@ -12,6 +12,7 @@ It offers the following set of features:
 
 ## How to launch
 - Clone this project in your machine: `git clone https://github.com/styla/custom-module-boilerplate.git`
+- Make sure that [yarn](https://classic.yarnpkg.com/lang/en/docs/install/) is installed on your machine
 - Install all the project dependencies by running: `yarn`
 - Start the service with: `yarn start`
 - Your browser should open automatically. If not, open: http://localhost:6006/ 
